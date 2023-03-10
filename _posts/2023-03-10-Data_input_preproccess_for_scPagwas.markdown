@@ -73,3 +73,4 @@ gwas_data <- bigreadr::fread2("/share/pub/dengcy/Cancer_Gwas/CollectedData/Gwas_
 gwas_data <- bigreadr::fread2(system.file("extdata", "GWAS_summ_example.txt", package = "scPagwas"))
 knitr::kable(head(gwas_data))
 ```
+![alt_text](/public/img/figure1.1.png)
