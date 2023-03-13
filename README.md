@@ -4,8 +4,7 @@ title: About
 permalink: /about/
 ---
 
-## scPagwas
-<img src="/public/img/logo.png#pic_right" width="10%" style="display: block; margin: auto;" />
+<img src="/public/img/logo.png" width="10%" style="display: block; margin: auto;" />
 
 **scPagwas** employing the polygenic regression model to uncover trait-relevant cell subpopulations by incorporating pathway activity transformed scRNA-seq data with genome-wide association studies (GWAS) data.
 
@@ -32,7 +31,7 @@ devtools::install_github("sulab-wmu/scPagwas")
 ```
 ## Usage 
 quick-start example: 
-```{r message=FALSE, eval = FALSE}
+```ruby
  library(scPagwas)
  #1.start to run the wrapper functions for example.
  Pagwas_data<-scPagwas_main(Pagwas = NULL,
