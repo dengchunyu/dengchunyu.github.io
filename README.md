@@ -7,7 +7,7 @@ permalink: /about/
 ## scPagwas
 ![alt_text](/public/img/logo.png)
 **scPagwas** employing the polygenic regression model to uncover trait-relevant cell subpopulations by incorporating pathway activity transformed scRNA-seq data with genome-wide association studies (GWAS) data.
-![alt_text](/public/img/figure1.1.png)
+![alt_text](/public/img/figure1.png)
 
 The methodology and benchmarking performance are described in: 
 
