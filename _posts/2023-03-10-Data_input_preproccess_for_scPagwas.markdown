@@ -6,8 +6,8 @@ category: sample
 ---
 # Data input
 
-There were three input resources for you to prepare in scPagwas: scRNA-seq dataset(seruat format), a GWAS summary dataset(txt file) on a given phenotype and an extensive panel of pathways or functional gene sets(gene symbol list).
-
+- Resources1: There were tow input files for you must to prepare in scPagwas: scRNA-seq dataset(seruat format), a GWAS summary dataset(txt file);
+- Resources2: There were three input files for you choosing to prepare in scPagwas: an extensive panel of pathways or functional gene sets(gene symbol list); Gene block annotation nd LD data.
 ## Resources1
 ### 1.Single cell data Input
 
@@ -60,11 +60,10 @@ gwas_data <- bigreadr::fread2(system.file("extdata", "GWAS_summ_example.txt", pa
 knitr::kable(head(gwas_data))
 ```
 ## Resource2
-There were three input resources in scPagwas (Most of time need not prepare): an extensive panel of pathways or functional gene sets(gene symbol list); and LD data.
 
 ### 3.Pathway gene list
 
-There are some processed pathway gene list provided by scPagwas package: all these pathway list are including gene ids; Gene block annotation(the same id with pathway list);
+There are some processed pathway gene lists provided by scPagwas package: all these pathway lists are including gene ids; Gene block annotation(the same id with pathway list);
 
 -   Genes_by_pathway_kegg
 -   genes.by.celltype.pathway
