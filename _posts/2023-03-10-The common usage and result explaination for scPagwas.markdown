@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The vignette for Bmmc singlecell and monocytecount trait!"
+title:  "The common usage and result explaination for scPagwas!"
 date:   2023-03-10 19:31:29 +0900
 categories: Sample
 ---
