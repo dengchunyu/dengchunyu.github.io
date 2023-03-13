@@ -7,9 +7,9 @@ categories: Sample
 ## Preprocessed data
 
 We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
-The processed data can be download from here: monocytecount_prune_gwas_data.txt <https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=wGAip7>
+The processed data can be download from [here](https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=cb5Ihf).
 
-BMMC scRNA-seq data can be obtained and treated in `Data_input_preproccess_for_scPagwas`.
+BMMC example scRNA-seq data can be obtained and treated in `Data_input_preproccess_for_scPagwas` and download from [here](https://1drv.ms/u/s!As-aKqXDnDUHi9pNciEgQFbe-AHgLw?e=4JiHRw).
 
 ## 1. Compute the singlecell and celltype result for monocytecount trait
 
@@ -32,14 +32,12 @@ Pagwas<-scPagwas_main(Pagwas =NULL,
                      output.dirs="monocytecount_bmmc",
                      #seruat_return=T,
                      Pathway_list=Genes_by_pathway_kegg,
-                     ncores=5,
                      assay="RNA",
                      singlecell=T, 
                      celltype=T,
                      block_annotation = block_annotation,
                      chrom_ld = chrom_ld)
 
-save(Pagwas,file = "monocytecount_bmmc_Pagwas1.10.0.RData")
 ```
 Sometime, we need to remove the objects in cache folder: 
 ```ruby
@@ -115,7 +113,7 @@ In **monocytecount_bmmc** result document folder, several result files are inclu
 
 -   **\*\_Pathway_singlecell_lm_results.txt** : The regression result for all pahtway and single cell matrix;
 
--   \*\_singlecell_Pathways_rankPvalue.csv : The pathway pvalue for eache singlecell;
+-   **\*\_singlecell_Pathways_rankPvalue.csv** : The pathway pvalue for eache singlecell;
 
 -   **\*\_singlecell_scPagwas_score_pvalue.Result.csv** : The data frame result for each cell inlcuding scPagwas.TRS.Score, scPagwas.gPAS.score, pValueHighScale, qValueHighScale;
 
