@@ -2,7 +2,7 @@
 layout: post
 title:  "Note and Problems"
 date:   2023-03-14 19:31:29 +0900
-categories: Sample
+categories: Note
 ---
 
 ## Note
