@@ -2,7 +2,7 @@
 layout: post
 title:  "Split big scRNAseqData and integrate_result"
 date:   2023-03-13 19:31:29 +0900
-categories: Sample
+categories: FlexibleUse
 ---
 
 ## Run the scPagwas for big scRNA-seq data 
