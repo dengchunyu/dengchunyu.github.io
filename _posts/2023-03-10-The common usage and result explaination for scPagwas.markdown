@@ -2,7 +2,7 @@
 layout: post
 title:  "The common usage and result explaination for scPagwas!"
 date:   2023-03-10 19:31:29 +0900
-categories: Sample
+categories: RoutineUse
 ---
 ## Preprocessed data
 This is a real example for the artical. We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
