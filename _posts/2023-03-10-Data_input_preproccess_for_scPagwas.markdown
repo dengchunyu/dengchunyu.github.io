@@ -2,7 +2,7 @@
 layout: post
 title: Data input and preproccess for scPagwas
 date: 2023-03-10 19:20:23 +0900
-category: sample
+category: Sample
 ---
 # Data input
 
