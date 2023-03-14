@@ -2,7 +2,7 @@
 layout: post
 title:  "Multi-Trait for one Single-cell Data"
 date:   2023-03-13 19:31:29 +0900
-categories: Sample
+categories: FlexibleUse
 ---
 ## Get data
 This vignette description a situation that multiple traits files are running for one single cell data. In this case, we can running single cell function for prepare and save the result for the following traits' code program. 
