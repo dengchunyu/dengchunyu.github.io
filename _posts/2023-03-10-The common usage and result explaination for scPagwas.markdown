@@ -5,24 +5,14 @@ date:   2023-03-10 19:31:29 +0900
 categories: Sample
 ---
 ## Preprocessed data
+This is a real example for the artical. We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
+The processed gwas data can be download from [here](https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=cb5Ihf).
 
-We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
-The processed data can be download from [here](https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=cb5Ihf).
-
-BMMC example scRNA-seq data can be obtained and treated in `Data_input_preproccess_for_scPagwas` and download from [here](https://1drv.ms/u/s!As-aKqXDnDUHi9pNciEgQFbe-AHgLw?e=4JiHRw).
+BMMC example scRNA-seq data can be download from [here](https://1drv.ms/u/s!As-aKqXDnDUHi9pNciEgQFbe-AHgLw?e=4JiHRw).
 
 ## 1. Compute the singlecell and celltype result for monocytecount trait
 
-If we running scPagwas in multi-core in Server environment, there may cause an error: `Error: Two levels of parallelism are used. See`?a
-ssert_cores\`\` add this code before call in R environment:
-
-```ruby
-export OPENBLAS_NUM_THREADS=1
-```
-
-There is no need to run this code in window system.
-
-In this example, we run the scPagwas for usual step, both running singlecell and celltype process.
+In this example, we run the scPagwas for usual steps, both running singlecell and celltype process.
 ```ruby
 library(scPagwas)
 Pagwas<-scPagwas_main(Pagwas =NULL,
@@ -39,12 +29,7 @@ Pagwas<-scPagwas_main(Pagwas =NULL,
                      chrom_ld = chrom_ld)
 
 ```
-Sometime, we need to remove the objects in cache folder: 
-```ruby
-if(length(SOAR::Objects())>0){
- SOAR::Remove(SOAR::Objects()) 
-}
-```
+
 ## 2. Result interpretation
 
 There are two types of result, Seruat format return result and files output;
