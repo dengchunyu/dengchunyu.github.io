@@ -8,7 +8,7 @@ categories: RoutineUse
 ## Three routine running situations
 There are some different situations for running scPagwas!
 
-### 1.1. Run both singlecell and celltypes functions.
+### 1.1. Run both singlecell and celltypes functions.  
 ```ruby
 library(scPagwas)
 Pagwas<-scPagwas_main(Pagwas =NULL,
@@ -29,7 +29,7 @@ Active assay: SCT (18715 features, 2000 variable features)
  3 other assays present: RNA, scPagwasPaHeritability, scPagwasPaPca
  2 dimensional reductions calculated: pca, umap
 ```
-Data in the scPagwas return result.
+Data in the scPagwas return result.  
 ```ruby
 names(Pagwas@meta.data)
 # [1] "orig.ident"          "nCount_RNA"          "nFeature_RNA"        "percent.mt"         
@@ -79,7 +79,7 @@ Pagwas_celltypes<-scPagwas_main(Pagwas =NULL,
                      chrom_ld = chrom_ld)
 ```
 
-The reuslt of celltypes is list format(not seurat format).
+The reuslt of celltypes is list format(not seurat format).  
 ```ruby
 names(Pagwas_celltypes)
 # [1] "Celltype_anno"     "data_mat"          "VariableFeatures" 
@@ -116,11 +116,11 @@ Active assay: SCT (18715 features, 2000 variable features)
  3 other assays present: RNA, scPagwasPaHeritability, scPagwasPaPca
  2 dimensional reductions calculated: pca, umap
 ```
-The result is seurat format.
+The result is seurat format.  
 
 ## 2. Running scPagwas step by step
 
-To utilize and understand scPagwas better, we run scPagwas flexibly step by step. In usual, we needn't run these sub-functions one by one.Most of the steps can founded in 'scPagwas_main' functions.
+To utilize and understand scPagwas better, we run scPagwas flexibly step by step. In usual, we needn't run these sub-functions one by one.Most of the steps can founded in 'scPagwas_main' functions.  
 
 We use an example provided by scPagwas package.
 
@@ -188,8 +188,9 @@ Pagwas$snp_gene_df <- SnpToGene(
         marg = 10000
       )
 ```
-SNP to gene dataframe:
-![alt_text](/public/img/snp_gene_df.png)
+SNP to gene dataframe:  
+![alt_text](/public/img/snp_gene_df.png) 
+
 ### 2.5 Pathway-SNP annotation  
 Mapping SNPs to pahtways and getting block data. 
 ```ruby
@@ -203,7 +204,7 @@ names(Pagwas)
 [9] "gwas_data"        "snp_gene_df"      "pathway_blocks" 
 ```
 ### 2.6 Link the pathway blocks to pca score 
-Also run the regression function for single cell. 
+Also run the regression function for single cell.   
 ```ruby
 Pagwas <- Link_pathway_blocks_gwas(
       Pagwas = Pagwas,
@@ -212,7 +213,8 @@ Pagwas <- Link_pathway_blocks_gwas(
       celltype = T,
       backingpath="./temp")
 ```
-The pathway regression result for single cell. 
+The pathway regression result for single cell.   
+
 ### 2.7 Perform regression for celltypes 
 Run the regression function for celltypes. 
 ```ruby
@@ -284,9 +286,9 @@ All these sub-functions for scPagwas can running dependently, but need to run or
  Seurat::DimPlot(Pagwas,pt.size=1,reduction="umap",label = T, repel=TRUE)+
  umap_theme()+ggtitle("Test")+labs(x="UMAP",y="")+theme(aspect.ratio=1)
 ```
-![alt_text](/public/img/steps_Figure1.png)
+![alt_text](/public/img/steps_Figure1.png)  
 
-scPagwas.TRS.Score1 and positive(p<0.05) cells showing in dimplot.
+scPagwas.TRS.Score1 and positive(p<0.05) cells showing in dimplot.  
 
 ```ruby
  scPagwas_Visualization(Single_data=Pagwas_singlecell,
@@ -314,7 +316,7 @@ plot_bar_positie_nagtive(seurat_obj=Pagwas_singlecell,
                          vec_group_colors=c("#E8D0B3","#7EB5A6"),
                          do_plot = T)
 ```
-![alt_text](/public/img/steps_figure5.png)
+![alt_text](/public/img/steps_figure5.png)  
 Plot the barplot of the proportion of celltypes in positive and negative Cells:
 
 ```ruby
@@ -326,7 +328,7 @@ plot_bar_positie_nagtive(seurat_obj=Pagwas_singlecell,
                               f_color=colorRampPalette(brewer.pal(n=10, name="RdYlBu")),
                               do_plot = T)
 ```
-![alt_text](/public/img/steps_figure6.png)
+![alt_text](/public/img/steps_figure6.png)  
 
 ### 3.3 Plot the heritability correlated genes
 
@@ -342,7 +344,7 @@ heritability_cor_scatterplot(gene_heri_cor=Pagwas_singlecell@misc$gene_heritabil
                              width = 7,
                              height = 7)
 ```
-![alt_text](/public/img/steps_figure7.png)
+![alt_text](/public/img/steps_figure7.png)  
 
 ### 3.4 Show expression of the top heritability correlation genes in celltypes
 
@@ -358,7 +360,8 @@ plot_vln_Corgenes(seurat_obj=Pagwas_singlecell,
              do_plot = T
              )
 ```
-![alt_text](/public/img/steps_figure9.png)
+![alt_text](/public/img/steps_figure9.png)  
+
 ### 4.6 celltypes bootstrap_results reuslt 
 Barplot for celltypes 
 
@@ -370,7 +373,8 @@ Bootstrap_P_Barplot(p_results=Pagwas_singlecell@misc$bootstrap_results$bp_value[
                     do_plot=T,
                     title = "Test")
 ```
-![alt_text](/public/img/steps_figure8.png)
+![alt_text](/public/img/steps_figure8.png)  
+
 Forest plot for estimate value. 
 ```ruby
 Bootstrap_estimate_Plot(Pagwas=Pagwas_singlecell,
