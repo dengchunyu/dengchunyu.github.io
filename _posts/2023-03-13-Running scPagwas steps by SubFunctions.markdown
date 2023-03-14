@@ -2,7 +2,7 @@
 layout: post
 title:  "Running scPagwas steps by SubFunctions"
 date:   2023-03-10 19:31:29 +0900
-categories: Sample
+categories: RoutineUse
 ---
 
 There are some different situations for running scPagwas!
