@@ -1,28 +1,18 @@
 ---
 layout: post
-title:  "The vignette for Bmmc singlecell and monocytecount trait!"
+title:  "The common usage and result explaination for scPagwas!"
 date:   2023-03-10 19:31:29 +0900
-categories: Sample
+categories: RoutineUse
 ---
 ## Preprocessed data
+This is a real example for the artical. We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
+The processed gwas data can be download from [here](https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=cb5Ihf).
 
-We use BMMC scRNA-seq data and monocyte count trait to test scPagwas.
-The processed data can be download from here: monocytecount_prune_gwas_data.txt <https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=wGAip7>
-
-BMMC scRNA-seq data can be obtained and treated in `Data_input_preproccess_for_scPagwas`.
+BMMC example scRNA-seq data can be download from [here](https://1drv.ms/u/s!As-aKqXDnDUHjfcMjN4VGtAw1Utm0w?e=ocUrEx).
 
 ## 1. Compute the singlecell and celltype result for monocytecount trait
 
-If we running scPagwas in multi-core in Server environment, there may cause an error: `Error: Two levels of parallelism are used. See`?a
-ssert_cores\`\` add this code before call in R environment:
-
-```ruby
-export OPENBLAS_NUM_THREADS=1
-```
-
-There is no need to run this code in window system.
-
-In this example, we run the scPagwas for usual step, both running singlecell and celltype process.
+In this example, we run the scPagwas for usual steps, both running singlecell and celltype process.
 ```ruby
 library(scPagwas)
 Pagwas<-scPagwas_main(Pagwas =NULL,
@@ -32,26 +22,19 @@ Pagwas<-scPagwas_main(Pagwas =NULL,
                      output.dirs="monocytecount_bmmc",
                      #seruat_return=T,
                      Pathway_list=Genes_by_pathway_kegg,
-                     ncores=5,
                      assay="RNA",
                      singlecell=T, 
                      celltype=T,
                      block_annotation = block_annotation,
                      chrom_ld = chrom_ld)
 
-save(Pagwas,file = "monocytecount_bmmc_Pagwas1.10.0.RData")
 ```
-Sometime, we need to remove the objects in cache folder: 
-```ruby
-if(length(SOAR::Objects())>0){
- SOAR::Remove(SOAR::Objects()) 
-}
-```
+
 ## 2. Result interpretation
 
 There are two types of result, Seruat format return result and files output;
 
-### 2.1 Pagwas : return result for seruat_return=TRUE
+### 2.1 Pagwas
 
 ```ruby
 > print(Pagwas)
@@ -82,12 +65,12 @@ Returns a Seruat data with entries(seruat_return=T):
 
     -   **scPagwas.gPAS.score**: Inheritance pathway regression effects score for each cells;
 
-    -   **CellScalepValue**: Ranked CellScalepValue for each cells;
+    -   **CellpValue**: Ranked CellpValue for each cells;
 
-    -   **CellScaleqValue**: Ranked CellScaleqValue for each cells, adjust p value.
+    -   **CellqValue**: Ranked CellqValue for each cells, adjust p value.
 
 
-3.  A new element names misc is added in result, `Pagwas@misc` is a list data including:
+3.  A new element names misc is added in scPagwas's result, `Pagwas@misc` is a list including:
 
     -   **Pathway_list**: filtered pathway gene list;
 
@@ -97,11 +80,10 @@ Returns a Seruat data with entries(seruat_return=T):
 
     -   **gene_heritability_correlation**: heritability correlation value for each gene;
 
-    -   **scPathways_rankPvalue**: p values for each pathway in each single cell;
-
     -   **bootstrap_results**: The bootstrap data frame results for celltypes including bootstrap pvalue and confidence interval.
-
+ 
 ### 2.1 Pagwas : output files result
+<img src="/public/img/resultfiles.png" width="50%" />
 
 In **monocytecount_bmmc** result document folder, several result files are including:
 
@@ -115,7 +97,7 @@ In **monocytecount_bmmc** result document folder, several result files are inclu
 
 -   **\*\_Pathway_singlecell_lm_results.txt** : The regression result for all pahtway and single cell matrix;
 
--   \*\_singlecell_Pathways_rankPvalue.csv : The pathway pvalue for eache singlecell;
+-   **\*\_singlecell_Pathways_rankPvalue.csv** : The pathway pvalue for eache singlecell;
 
 -   **\*\_singlecell_scPagwas_score_pvalue.Result.csv** : The data frame result for each cell inlcuding scPagwas.TRS.Score, scPagwas.gPAS.score, pValueHighScale, qValueHighScale;
 
@@ -148,8 +130,7 @@ png("monocyte_bmmc_dimplot_umap.png",width = 600, height = 600)
 dev.off()
 
 ```
-![alt_text](/public/img/monocyte_bmmc_dimplot_umap.png)
-
+<img src="/public/img/monocyte_bmmc_dimplot_umap.png" width="50%" />
 scPagwas.TRS.Score1 and positive(p<0.05) cells showing in dimplot.
 
 ```ruby
@@ -168,11 +149,15 @@ scPagwas.TRS.Score1 and positive(p<0.05) cells showing in dimplot.
 2) scPagwas.gPAS.score dimplot. 
 
 ![alt_text](/public/img/scPagwas.gPAS.score_tsne.png)
+<img src="/public/img/scPagwas.gPAS.score_tsne.png" width="50%" />
+
 3) scPagwas.TRS.Score dimplot. 
 
 ![alt_text](/public/img/scPagwas.TRS.Score_tsne.png)
+<img src="/public/img/scPagwas.TRS.Score_tsne.png" width="50%" />
 4) scPagwas_CellScaleqValue dimplot. 
 ![alt_text](/public/img/scPagwas_CellScaleqValue0.05_tsne.png)
+<img src="/public/img/scPagwas_CellScaleqValue0.05_tsne.png" width="50%" />
 Positive cells(q value<0.05): red dot; Negative cells: other dot. 
 
 ### 3.2 Plot the barplot of the proportion of positive Cell. 
@@ -223,11 +208,11 @@ plot_scpathway_dot(Pagwas=Pagwas,
                    filter_p=0.05,
                    max_logp=15,
                    display_max_sizes=F,
-                   size_var ="logrankPvalue" ,
+                   size_var ="CellqValue" ,
                    col_var="proportion",
                    shape.scale = 8,
                    cols.use=c("lightgrey", "#E45826"),
-                   dend_x_var = "logrankPvalue",
+                   dend_x_var = "CellqValue",
                    dist_method="euclidean",
                    hclust_method="ward.D",
                    do_plot = T,
