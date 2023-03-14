@@ -2,7 +2,7 @@
 layout: post
 title:  "Prune GwasSummary FIles by plink"
 date:   2023-03-13 19:31:29 +0900
-categories: Sample
+categories: DataPrepare
 ---
 ```{r setup}
 library(scPagwas)
