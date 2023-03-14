@@ -349,7 +349,8 @@ heritability_cor_scatterplot(gene_heri_cor=Pagwas_singlecell@misc$gene_heritabil
 ```ruby
 suppressMessages(library("ggsci"))
 suppressMessages(library("Seurat"))
-top5genes<-rownames(Pagwas_singlecell@misc$gene_heritability_correlation)[order(Pagwas_singlecell@misc$gene_heritability_correlation,decreasing = T)[1:5]]
+top5genes<-rownames(Pagwas_singlecell@misc$gene_heritability_correlation)[order(Pagwas_singlecell@misc$gene_heritability_correlation,decreasing = T)[c(4,30,36,55)]]
+
 plot_vln_Corgenes(seurat_obj=Pagwas_singlecell,
              assay="RNA", slot="data",
              var_group="anno",
