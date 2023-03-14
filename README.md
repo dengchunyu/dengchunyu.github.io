@@ -52,10 +52,10 @@ scPagwas provides a number of tutorials for various situation. Please also visit
 
 - The [Data_input_preproccess_for_scPagwas](https://dengchunyu.github.io/sample/2023/03/10/Data_input_preproccess_for_scPagwas.html) tutorial provides the methods of data-input preproccess for scPagwas.
 
-- The [Bmmc_monocytecount_singlecell_celltype_vignette](https://dengchunyu.github.io/sample/2023/03/10/Bmmc_monocytecount_singlecell_celltype_vignette.html) tutorial provides the usual procedure for scPagwas including the result interpretation are discussed, and visualizing their characteristics.
+- The [The-common-usage-and-result-explaination-for-scPagwas](https://dengchunyu.github.io/sample/2023/03/10/The-common-usage-and-result-explaination-for-scPagwas.html) tutorial provides the usual procedure for scPagwas including the result interpretation are discussed, and visualizing their characteristics.
 
-- The [Running_scPagwas_steps_by_SubFunctions]() tutorial provides the procedure for only cell types or single cell functions; Otherwise, a step by step introduction for scPgawas sub-functions is also provided.
+- The [Running_scPagwas_steps_by_SubFunctions](https://dengchunyu.github.io/sample/2023/03/10/Running-scPagwas-steps-by-SubFunctions.html) tutorial provides the procedure for only cell types or single cell functions; Otherwise, a step by step introduction for scPgawas sub-functions is also provided.
 
-- The [Multi_TraitFiles_for_one_SingleData_running]() tutorial provides the procedure that running scPagwas based on multiple trait files in one scRNA-seq dataset.
+- The [Multi_TraitFiles_for_one_SingleData_running](https://dengchunyu.github.io/sample/2023/03/13/Multi-Trait-for-one-Single-cell-Data.html) tutorial provides the procedure that running scPagwas based on multiple trait files in one scRNA-seq dataset.
 
-- The [Split_big_scRNAseqData_and_integrate_result]() tutorial provides the procedure that running scPagwas with several splited scRNA-seq datasets while the whole dataset is too big to run.
+- The [Split_big_scRNAseqData_and_integrate_result](https://dengchunyu.github.io/sample/2023/03/10/Split-big-scRNAseqData-and-integrate_result.html) tutorial provides the procedure that running scPagwas with several splited scRNA-seq datasets while the whole dataset is too big to run.
