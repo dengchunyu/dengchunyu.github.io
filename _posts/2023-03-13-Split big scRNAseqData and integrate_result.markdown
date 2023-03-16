@@ -6,8 +6,8 @@ categories: FlexibleUse
 ---
 
 ## Run the scPagwas for big scRNA-seq data 
-`If your computer storage is enough, ignore this item`.
-Sometimes, the storage is limit for your analysis, you can splice the scRNA-seq data set by celltypes or in order. 
+`If your computer storage is enough, ignore this item`.  
+Sometimes, the storage of your server is limitation for your analysis, you can splice the scRNA-seq data set by celltypes or in order. 
 
 ### 1. Splice scRNA-seq data 
 Note, you can split the scRNA-seq data by celltypes or in random.
@@ -30,14 +30,6 @@ Split_index <- rep(1:n_split, time = ceiling(ncol(scRNAexample)/n_split), length
 
 for (i in 1:n_split) {
   Example_splice <- scRNAexample[,Split_index==i]
-  saveRDS(Example_splice,file = paste0(set.dirs,"Example_splice",i,".rds"))
-}
-
-#########
-###1.By celltypes
-#Create the random index number.
-for (i in levels(Idents(scRNAexample))) {
-  Example_splice <- subset(scRNAexample,idents = i)
   saveRDS(Example_splice,file = paste0(set.dirs,"Example_splice",i,".rds"))
 }
 
