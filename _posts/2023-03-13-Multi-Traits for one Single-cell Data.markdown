@@ -70,8 +70,5 @@ Pagwas_MeanCorpusVolume<-scPagwas_main(Pagwas =Pagwas,
                      assay="RNA",
                      block_annotation = block_annotation,
                      chrom_ld = chrom_ld)
-if(length(SOAR::Objects())>0){
- SOAR::Remove(SOAR::Objects()) 
-}
 ```
 
