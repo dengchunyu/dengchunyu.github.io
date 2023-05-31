@@ -170,12 +170,17 @@ scPagwas.TRS.Score1 and positive(p<0.05) cells showing in dimplot.
 ```
 
 2) scPagwas.gPAS.score dimplot. 
+
 <img src="/public/img/scPagwas.gPAS.score_tsne.png" width="30%" />
 
 3) scPagwas.TRS.Score dimplot. 
+
 <img src="/public/img/scPagwas.TRS.Score_tsne.png" width="30%" />
+
 4) scPagwas_CellScaleqValue dimplot. 
-<img src="/public/img/scPagwas_CellScaleqValue0.05_tsne.png" width="30%" />
+
+<img src="/public/img/scPagwas_CellScaleqValue0.05_tsne.png" width="20%" />
+
 Positive cells(q value<0.05): red dot; Negative cells: other dot. 
 
 ### 4.2 Plot the barplot of the proportion of positive Cell. 
