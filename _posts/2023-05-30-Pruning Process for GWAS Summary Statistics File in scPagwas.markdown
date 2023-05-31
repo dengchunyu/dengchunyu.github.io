@@ -4,10 +4,6 @@ title:  "Pruning Process for GWAS Summary Statistics File in scPagwas"
 date:   2023-05-30 19:31:29 +0900
 categories: DataPrepare
 ---
-```{r setup}
-library(scPagwas)
-```
-
 
 # Pruning Process for GWAS Summary Statistics File in scPagwas
 
