@@ -48,12 +48,3 @@ library(scPagwas)
                      celltype=T# Whether to run the celltype process.
 )
 ```
-## Tutorials
-scPagwas provides a number of tutorials for various situation. Please also visit the documentation.
-
-- The [Introduction to Data Input and Preprocessing in scPagwas]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/dataprepare/2023/05/30/Introduction-to-Data-Input-and-Preprocessing-in-scPagwas.html)) tutorial provides the methods of data-input preproccess for scPagwas.
-- The [Conventional Parameters and Usage Instructions with Demo Example Data]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/routineuse/2023/05/30/Conventional-Parameters-and-Usage-Instructions-with-Demo-Example-Data.html)) tutorial provides the procedure for only cell types or single cell functions; Otherwise, a step by step introduction for scPgawas sub-functions is also provided.
-- The [Conventional result and visualization Instructions with Real-World Examples]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/routineuse/2023/05/30/Conventional-result-and-visualization-Instructions-with-Real-World-Examples.html)) tutorial provides the usual procedure for scPagwas including the result interpretation are discussed, and visualizing their characteristics.
-- The [Perform calculations for multiple traits based on a single-cell dataset]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/flexibleuse/2023/05/30/Perform-calculations-for-multiple-traits-based-on-a-single-cell-dataset.html)) tutorial provides the procedure that running scPagwas based on multiple trait files in one scRNA-seq dataset.
-- The [Strategies for Large-scale Single-cell Data Subsetting and Computation]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/flexibleuse/2023/05/30/Strategies-for-Large-scale-Single-cell-Data-Subsetting-and-Computation.html)) tutorial provides the procedure that running scPagwas with several splited scRNA-seq datasets while the whole dataset is too big to run.
-- The [Pruning Process for GWAS Summary Statistics File in scPagwas]([scPagwas (dengchunyu.github.io)](https://dengchunyu.github.io/dataprepare/2023/05/30/Pruning-Process-for-GWAS-Summary-Statistics-File-in-scPagwas.html)). To optimize computing time, it is recommended to preprocess the GWAS summary statistics file using Plink software's prune function before inputting it, especially when the file contains a large number of SNPs (up to tens of millions).
