@@ -45,9 +45,6 @@ Single_data <- ScaleData(Single_data)
 
 ### 2.GWAS summary data Input
 
-GWAS Summary statistics are download from Finngen:
-[GBM_EXALLC](https://storage.googleapis.com/finngen-public-data-r7/summary_stats/finngen_R7_C3_GBM_EXALLC.gz)
-
 #### 2.1.Read and progrocess the example GWAS Summary statistics file
 
 In R environment, select the specific columns and output the result.
