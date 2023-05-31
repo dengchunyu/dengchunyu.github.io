@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Multi-Trait for one Single-cell Data"
-date:   2023-03-13 19:31:29 +0900
+title:  "Perform calculations for multiple traits based on a single-cell dataset"
+date:   2023-05-30 19:31:29 +0900
 categories: FlexibleUse
 ---
 ## Get data
@@ -28,16 +28,13 @@ Pagwas <- Single_data_input(Pagwas=Pagwas,
                             Pathway_list=Genes_by_pathway_kegg)
 Pagwas <- Pathway_pcascore_run(Pagwas=Pagwas,
                                Pathway_list=Genes_by_pathway_kegg)
-names(Pagwas)
-#[1] "Celltype_anno"    "data_mat"         "VariableFeatures" "merge_scexpr"    
-#[5] "rawPathway_list"  "Pathway_list"     "pca_scCell_mat"   "pca_cell_df"  
 ```
 
-## Run different traits for scPagwas. 
+## Perform scPagwas calculations separately for each trait 
 
 We take the Pagwas as input for `scPagwas_main`, therefore, there is no need to run the Pathway_pcascore_run function for different traits which will save times. 
 
-Second, Run the `scPagwas_main` for different trait files and take the single-cell result as input. 
+Use the previous single-cell result data as input for scPagwas_main. By doing so, the intermediate results from the single-cell analysis will be carried over to the new computation, saving time and computational resources.
 
 ```ruby
 #Pagwas is the result for last blocks. It inherits the single cell result in the previous result
@@ -49,7 +46,10 @@ Pagwas_monocytecount<-scPagwas_main(Pagwas =Pagwas,
                      Pathway_list=Genes_by_pathway_kegg,
                      assay="RNA",
                      block_annotation = block_annotation,
-                     chrom_ld = chrom_ld)
+                     iters_singlecell = 100,
+                     chrom_ld = chrom_ld,# The LD data is provided by package.
+                     singlecell=T, # Whether to run the singlecell process.
+                     celltype=T)
 
 Pagwas_Lymphocytecount<-scPagwas_main(Pagwas =Pagwas,
                      gwas_data ="Lymphocytecount_gwas_data.txt",
@@ -59,7 +59,10 @@ Pagwas_Lymphocytecount<-scPagwas_main(Pagwas =Pagwas,
                      Pathway_list=Genes_by_pathway_kegg,
                      assay="RNA",
                      block_annotation = block_annotation,
-                     chrom_ld = chrom_ld)
+                     iters_singlecell = 100,
+                     chrom_ld = chrom_ld,# The LD data is provided by package.
+                     singlecell=T, # Whether to run the singlecell process.
+                     celltype=T)
 
 Pagwas_MeanCorpusVolume<-scPagwas_main(Pagwas =Pagwas,
                      gwas_data ="MeanCorpusVolume_prune_gwas_data.txt",
@@ -69,7 +72,10 @@ Pagwas_MeanCorpusVolume<-scPagwas_main(Pagwas =Pagwas,
                      Pathway_list=Genes_by_pathway_kegg,
                      assay="RNA",
                      block_annotation = block_annotation,
-                     chrom_ld = chrom_ld)
+                     iters_singlecell = 100,
+                     chrom_ld = chrom_ld,# The LD data is provided by package.
+                     singlecell=T, # Whether to run the singlecell process.
+                     celltype=T)
 if(length(SOAR::Objects())>0){
  SOAR::Remove(SOAR::Objects()) 
 }

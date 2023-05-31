@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Data input and preproccess for scPagwas
-date: 2023-03-10 19:20:23 +0900
+title: Introduction to Data Input and Preprocessing in scPagwas
+date: 2023-05-30 19:20:23 +0900
 category: DataPrepare
 ---
 # Data input
@@ -21,14 +21,14 @@ Single cell count data:[GSE115978_counts.csv.gz](https://ftp.ncbi.nlm.nih.gov/ge
 
 #### 1.2.Progressing scRNA-seq dataset
 
--   1). The scRNA-seq dataset should have Idents for cell types or clusters.
--   2). The scRNA-seq dataset should be normalized.
+-   To analyze scRNA-seq data using scPagwas, it is essential to have an RNA assay included. If working with raw scRNA-seq data, further preprocessing steps such as clustering and annotation are required. After clustering, it is necessary to assign the annotated information to the "Idents" variable. Additionally, the gene names in scRNA-seq data should be represented using gene symbols.
+    Since we have downloaded pre-annotated scRNA-seq data, we will skip the steps of clustering and annotation in this analysis. Therefore, we won't be performing any clustering or annotation on the dataset.
+    -   1). The scRNA-seq dataset should have Idents for cell types or clusters.
+    -   2). The scRNA-seq dataset should be normalized.
 
 ```ruby
-##read the data
 library(Seurat)
 library(SeuratObject)
-setwd("/share/pub/dengcy/Cancer_Gwas/CollectedData/SingleCelldata/Melanoma/GSE115978")
 counts <- read.csv("GSE115978_counts.csv.gz",row.names=1)
 Anno<- read.csv("GSE115978_cell.annotations.csv.gz")
 ##create the SeuratObject
@@ -39,9 +39,8 @@ Single_data<-Seurat::CreateSeuratObject(
 )
 
 Idents(Single_data)<-Single_data$BioClassification
-
-Single_data <- ScaleData(Single_data)
 Single_data <- NormalizeData(Single_data, normalization.method = "LogNormalize", scale.factor = 10000)
+Single_data <- ScaleData(Single_data)
 ```
 
 ### 2.GWAS summary data Input
@@ -59,23 +58,38 @@ The GWAS Summary statistics file need to be processed into a "txt" file includin
 gwas_data <- bigreadr::fread2(system.file("extdata", "GWAS_summ_example.txt", package = "scPagwas"))
 knitr::kable(head(gwas_data))
 ```
+In the context of scPagwas software, the presence of specific columns in the GWAS summary file is generally required. However, there are situations where the obtained GWAS summary may not perfectly meet these requirements. In such cases, there are alternative approaches that can be employed.
+
+Among the six columns typically present in the GWAS summary file, the "maf" column is primarily used in scPagwas for SNP filtering purposes. It allows for the reduction of SNP quantity and computational burden. However, it does not play a critical role in the analysis. As a workaround, it is possible to customize this column to include any value above the minimum minor allele frequency (maf), essentially bypassing the maf filtering step. This modification has no significant impact on the results since scPagwas aims to integrate a larger number of SNP data, regardless of the magnitude of their effects.
+
+In GWAS summary data, the effect size (ES) and standard error (SE) for each SNP locus are typically provided. In cases where beta data is unavailable, it is possible to compute a conversion using the following formula:
+beta = ES / SE
+Here, beta represents the effect size of the SNP locus. Alternatively, the ES column itself can be used to represent the impact of the SNP locus on the target trait. Therefore, replacing the beta column with the ES values directly for scPagwas calculations is also acceptable. However, it is important to maintain consistent column names as per the example data. 
+
+Additionally, both TXT files and data frames are acceptable formats for input data.
+
+Please note that scPagwas analysis supports these adaptations to accommodate GWAS summary files that do not perfectly align with the standard requirements.
+
 ## Resource2
 
 ### 3.Pathway gene list
 
-There are some processed pathway gene lists provided by scPagwas package: all these pathway lists are including gene ids; Gene block annotation(the same id with pathway list);
+-   There are some processed pathway gene list provided by scPagwas package: all these pathway list are including gene ids; Gene block annotation(the same id with pathway list);
 
--   Genes_by_pathway_kegg
--   genes.by.celltype.pathway
--   genes.by.gpbp.pathway
--   genes.by.reactome.pathway
--   genes.by.regulatory.pathway
--   genes.by.tft.pathway
--   genes.by.hallmark.pathway
--   genes.by.immunologic.pathway
--   genes.by.immunesigdb.pathway
+    -   Genes_by_pathway_kegg
+    -   genes.by.gpbp.pathway
+    -   genes.by.reactome.pathway
+    -   genes.by.regulatory.pathway
+    -   genes.by.tft.pathway
+    -   reduce_genes.by.gpbp.pathway
+    -   reduce_genes.by.reactome.pathway
+    -   reduce_genes.by.regulatory.pathway
+    -   reduce_genes.by.tft.pathway
 
-There are some steps for get these pathway gene list: There is no need to repeat running these code.
+When selecting pathway data, there are several principles to consider based on the scPagwas software package. Firstly, it is recommended to prioritize pathways with higher universality and broader coverage, such as Genes_by_pathway_kegg and genes.by.gpbp.pathway. Single functional pathways like hallmark and immunologic have not been thoroughly tested for effectiveness. Secondly, the number of pathways included in the list affects both the result and time efficiency of the analysis. Too many pathways can significantly increase computation time, while too few may not provide sufficient coverage. Typically, a reasonable range is between 200 to 1000 pathways, with a gene coverage of at least 50% when compared to the genes in the single-cell expression profile data. It is advisable to use established pathways like Genes_by_pathway_kegg and genes.by.gpbp.pathway (or reduced_genes.by.gpbp.pathway with appropriate redundancy removal) to ensure result efficacy. The effectiveness of these pathways has been extensively validated in published scPagwas articles. 
+
+Examples of pathway acquisition and redundancy removal are provided below for reference.
+There is no need to repeat running these code.
 
 #### KEGG pathway list
 
@@ -119,17 +133,18 @@ We set the `genes.by.reactome.pathway` for example, there are 1615 gene list and
 -   `remove_proporion` The propotion of duplicated between seed pathway and the others
 
 ```ruby
-reduce_genes.by.reactome.pathway<-scPagwas::reduce_pathway(
-  pathway_seed=names(genes.by.reactome.pathway)[sample(1:length(genes.by.reactome.pathway),500)],
-                                                 
-  pathway_list=genes.by.reactome.pathway,
-                                                 
-  remove_proporion=0.6)
-length(reduce_genes.by.reactome.pathway)
-#[1] 1045
-length(unlist(reduce_genes.by.reactome.pathway))
-#[1] 34980
+set.seed(123)
+reduce_genes.by.reactome.pathway<-reduce_genes.by.reactome.pathway[sapply(reduce_genes.by.reactome.pathway,length)>50]
+reduce_genes.by.reactome.pathway<-reduce_genes.by.reactome.pathway[sapply(reduce_genes.by.reactome.pathway,length)<300]
 
+reduce_genes.by.reactome.pathway<-scPagwas::reduce_pathway(
+  pathway_seed=names(reduce_genes.by.reactome.pathway)[sample(1:length(reduce_genes.by.reactome.pathway),50)],
+                                                 pathway_list=reduce_genes.by.reactome.pathway,
+                                                 remove_proporion=0.5)
+length(reduce_genes.by.reactome.pathway)
+#214
+length(unique(unlist(reduce_genes.by.reactome.pathway)))
+#7667
 ```
 > Note.The summed genes for all pathways should not smaller than 1/2 of the number of genes in single cell data.
 
@@ -152,8 +167,11 @@ gtf_df <- gtf_df[gtf_df$type=="gene",]
 block_annotation<-gtf_df[,c(1,2,3,5)]
 colnames(block_annotation)<-c("chrom", "start","end","label")
 ```
+The block_annotation data provided by scPagwas is used to obtain the precise coordinates of genes, which enables the determination of the TSS range of each gene based on the size of the window. However, this data is not optimized for long-range enhancer regulation, which is why other methods like sclinker attempt to incorporate this information into the analysis. While block_annotation can be customized to suit specific annotation data formats, we consider TSS regulation to be more reliable and therefore prefer this approach.
+
 ### 5.LD data
 
+The LD data provided by the scPagwas software package is fixed and generally does not require modification.
 The 1,000 Genomes Project Phase 3 Panel was applied to calculate the linkage disequilibrium (LD) among SNPs extracted from GWAS summary statistics.
 the processed LD data are show here:
 
