@@ -125,7 +125,7 @@ if (!dir.exists(output.dirs)) {
     dir.create(output.dirs)
 }
 if (!dir.exists(output.dirs)) {
-  dir.create(paste0("./", output.dirs, "/temp"))
+  dir.create(paste0("./", output.dirs,"/temp_",output.prefix))
 }
 
 Pagwas <- scPagwas::Pathway_annotation_input(
@@ -137,7 +137,7 @@ Pagwas <- scPagwas::Link_pathway_blocks_gwas(
       chrom_ld = chrom_ld,
       singlecell = T,
       celltype = F,
-      backingpath=paste0("./", output.dirs, "/temp"),
+      backingpath=paste0("./", output.dirs,"/temp_",output.prefix),
       n.cores=1
       )
 pmat<-Pagwas$Pathway_sclm_results
@@ -215,8 +215,9 @@ All the results can be found in the Pagwas result list.
 
 ## 2.Solution 2
 
-
 ### 2.1. Splice scRNA-seq data 
+
+I do not recommend using method 2 unless your server memory cannot handle the single-cell data preprocessing. The results of method 2 may differ from the conventional results.
 
 In the second approach, the single-cell data was initially divided into several partitions, and then each partition was individually processed using scPagwas.
 When you split the scRNA-seq data in random, you should set the  min_clustercells=1.
