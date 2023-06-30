@@ -320,12 +320,12 @@ names(Pagwas)
 Run heritability correlation for all genes.
 
 ```ruby
-Pagwas$gene_heritability_correlation <- scGet_gene_heritability_correlation(scPagwas.gPAS.score=Pagwas$scPagwas.gPAS.score,
+Pagwas$GeneticExpressionIndex <- scGet_GEI(scPagwas.gPAS.score=Pagwas$scPagwas.gPAS.score,
                                     data_mat=Pagwas$data_mat)
 
 ```
 
-- gene_heritability_correlation: Correlation coefficient between each gene and the genetic score.
+- GeneticExpressionIndex: Correlation index between each gene and the genetic score.
 
 
 ### 3.10 Calculate the TRS score for top genes. 
