@@ -45,7 +45,7 @@ Parameters and their Descriptions in scPagwas:
 
 - iters_celltype = 200: Number of iterations for bootstrap computation of cell-type p-values.
 
-- iters_singlecell = 100: Number of iterations for background-corrected single-cell p-value computation. Note that this parameter significantly affects the computation time.
+- iters_singlecell = 100: Number of iterations for background-corrected single-cell p-value computation. Note that this parameter significantly affects the computation time. The parameter "iters_singlecell" is used to calculate the significance p-value for individual cells. However, we have observed that this step requires a significant amount of computational memory. Therefore, we do not recommend selecting a large value for this parameter initially.If you do not want to waste time calculating the p-value, you can choose to set it as 0.
 
 - n_topgenes = 1000: Number of top genes selected for calculating the Transcriptional Regulator Score (TRS). Here, we follow the common practice of selecting 1000 genes.
 
