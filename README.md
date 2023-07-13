@@ -14,7 +14,7 @@ The methodology and benchmarking performance are described in:
 
 > Polygenic regression uncovers trait-relevant cellular contexts through pathway activation transformation of single-cell RNA sequencing data.(medRxiv.2023) 
 
-Code for reproducing the analysis from the paper is available [here](https://github.com/dengchunyu/scPagwas_reproduce). 
+Code for reproducing the analysis from the paper is available [here](https://github.com/dengchunyu/scPagwas_reproduce), or [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8137370.svg)](https://doi.org/10.5281/zenodo.8137370)
 You can install the released version of scPagwas from [github](https://github.com/sulab-wmu/scPagwas) with: 
 
 ```ruby
