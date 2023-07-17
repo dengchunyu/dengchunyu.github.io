@@ -315,17 +315,17 @@ names(Pagwas)
 - "scPagwas.gPAS.score": Genetic score for each cell, obtained by summing the columns of "Pathway_single_results". It represents the overall contribution of all pathways.
 
 
-### 3.9 Get the gene heritability correlation 
+### 3.9 Get the pearson correlation coefficients for gene(PCC) 
 
 Run heritability correlation for all genes.
 
 ```ruby
-Pagwas$GeneticExpressionIndex <- scGet_GEI(scPagwas.gPAS.score=Pagwas$scPagwas.gPAS.score,
+Pagwas$PCC <- scGet_PCC(scPagwas.gPAS.score=Pagwas$scPagwas.gPAS.score,
                                     data_mat=Pagwas$data_mat)
 
 ```
 
-- GeneticExpressionIndex: Correlation index between each gene and the genetic score.
+- PCC: Pearson correlation coefficients,Correlation index between each gene and the genetic score.
 
 
 ### 3.10 Calculate the TRS score for top genes. 
@@ -334,7 +334,7 @@ Calculate the TRS score for top genes by `AddModuleScore` and running the p valu
 
 ```ruby
 #Obtain the top 1000 genes with the highest genetic correlation scores.
-scPagwas_topgenes <- names(Pagwas$gene_heritability_correlation[order(Pagwas$gene_heritability_correlation, decreasing = T), ])[1:1000]
+scPagwas_topgenes <- names(Pagwas$PCC[order(Pagwas$PCC, decreasing = T), ])[1:1000]
 
 #Single_data refers to the single-cell data initially inputted.
 Single_data <- Seurat::AddModuleScore(Single_data, assay = "RNA", list(scPagwas_topgenes), name = c("scPagwas.TRS.Score"))

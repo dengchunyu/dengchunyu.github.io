@@ -163,11 +163,11 @@ for (i in 2:n) {
 save(pmat_merge,file="pmat_merge.RData")
 ```
 
-### 1.6 Calculating the scPagwas.gPAS.score and genetic association gene
+### 1.6 Calculating the scPagwas.gPAS.score for eahc cell and PCC for genes
 
 After calculating the scPagwas.gPAS.score, genetic association gene analysis is performed based on this score.
 
-In this process, 200 cells are randomly sampled from the large-scale single-cell data for computation. This process is repeated five times, and the results are integrated to obtain the final heritability correlation.
+In this process, 200 cells are randomly sampled from the large-scale single-cell data for computation. This process is repeated five times, and the results are integrated to obtain the final PCC for genes.
 
 The number of cells randomly selected and the number of random iterations depend on the specific quantity of single cells available.
 
@@ -179,15 +179,15 @@ load("pmat_merge.RData")
 #compute the gPas score.
 scPagwas.gPAS.score <- scPagwas::Merge_gPas(Pagwas,pmat_merge)
 
-#compute the heritability correlation for each gene. 
-GeneticExpressionIndex<-scPagwas::Corr_Random(Pagwas$data_mat,
-                                                     scPagwas.gPAS.score,
-                                                     seed=1234,
-                                                     random=T,
-                                                     Nrandom=5,# you need change this parameter
-                                                     Nselect=200 # you need change this parameter based on your cell numbers.
+#compute the heritability correlation(PCC) for each gene. 
+PCC<-scPagwas::Corr_Random(Pagwas$data_mat,
+                          scPagwas.gPAS.score,
+                          seed=1234,
+                          random=T,
+                          Nrandom=5,# you need change this parameter
+                          Nselect=200 # you need change this parameter based on your cell numbers.
     )
-scPagwas_topgenes <- names(GeneticExpressionIndex[order(GeneticExpressionIndex, decreasing = T)])[1:500]
+scPagwas_topgenes <- names(PCC[order(PCC, decreasing = T)])[1:500]
 ```
 
 ### 1.7 Compute the TRS and background correction p-values.
@@ -301,14 +301,14 @@ This step is identical to the later steps in Solution 1.
 
 ```ruby
 data_mat <- GetAssayData(Single_data, slot = "data", assay = "RNA")
-GeneticExpressionIndex<-scPagwas::Corr_Random(data_mat,
-                                                     scPagwas.gPAS.score,
-                                                     seed=1234,
-                                                     random=T,
-                                                     Nrandom=5, # you need change this parameter based on your cell numbers.
-                                                     Nselect=200 # you need change this parameter based on your cell numbers.
+PCC<-scPagwas::Corr_Random(data_mat,
+                           scPagwas.gPAS.score,
+                           seed=1234,
+                           random=T,
+                           Nrandom=5, # you need change this parameter based on your cell numbers.
+                           Nselect=200 # you need change this parameter based on your cell numbers.
     )
-scPagwas_topgenes <- names(GeneticExpressionIndex[order(GeneticExpressionIndex, decreasing = T)])[1:500]
+scPagwas_topgenes <- names(PCC[order(PCC, decreasing = T)])[1:500]
 Single_data <- Seurat::AddModuleScore(Single_data,
         assay = 'RNA',
         list(scPagwas_topgenes),
