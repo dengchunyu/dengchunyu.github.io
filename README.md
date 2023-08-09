@@ -10,9 +10,7 @@ permalink: /about/
 
 <img src="/public/img/Figure 1_v3_00.png" width="60%" style="display: block; margin: auto;" />
 
-The methodology and benchmarking performance are described in: 
-
-> Polygenic regression uncovers trait-relevant cellular contexts through pathway activation transformation of single-cell RNA sequencing data.(medRxiv.2023) 
+Please cite this article in press as:Ma et al.,Polygenic regression uncovers trait-relevant cellular contexts through pathway activation transformation of single-cell RNA sequencing data,Cell Genomics (2023),https://doi.org/10.1016/j.xgen.2023.100383
 
 Code for reproducing the analysis from the paper is available [here](https://github.com/dengchunyu/scPagwas_reproduce), or [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8137370.svg)](https://doi.org/10.5281/zenodo.8137370)
 You can install the released version of scPagwas from [github](https://github.com/sulab-wmu/scPagwas) with: 
@@ -30,7 +28,14 @@ devtools::install_github("sulab-wmu/scPagwas")
 ```
 
 In many cases, installing packages using `devtools::install_github` may fail. In such situations, an alternative approach is to download the package from a provided source URL and install it locally.
-Source package download from [here](https://github.com/dengchunyu/scPagwas_source).
+
+Download the package file from [here](https://api.github.com/repos/sulab-wmu/scPagwas/tarball/HEAD)
+Then install it locally.
+```r
+devtools::install_local("sulab-wmu-scPagwas-****.tar.gz")
+```
+
+Or,the source package can download from [here](https://github.com/dengchunyu/scPagwas_source).
 Before a successful installation, it is necessary to install many dependency packages based on the error messages.
 ```ruby
 install.packages("scPagwas_1.2.0.tar.gz",repos=NULL,type="source")
