@@ -187,7 +187,17 @@ PCC<-scPagwas::Corr_Random(Pagwas$data_mat,
                           Nrandom=5,# you need change this parameter
                           Nselect=200 # you need change this parameter based on your cell numbers.
     )
+
+mean_gpas<-mean(scPagwas.gPAS.score)
+a1<-which(scPagwas.gPAS.score >= mean_gpas)
+a2<-which(scPagwas.gPAS.score < mean_gpas)
+
+PCC_up <- scPagwas::Corr_Random(scPagwas.gPAS.score=scPagwas.gPAS.score[a1],data_mat=Pagwas$data_mat[,a1])
+PCC_down <- scPagwas::Corr_Random(scPagwas.gPAS.score=scPagwas.gPAS.score[a2],data_mat=Pagwas$data_mat[,a2])
+
 scPagwas_topgenes <- names(PCC[order(PCC, decreasing = T)])[1:500]
+scPagwas_upgenes <- names(PCC_up)[order(PCC_up, decreasing = T)[1:500]]
+scPagwas_downgenes <- names(PCC_down)[order(PCC_down, decreasing = F)[1:500]]
 ```
 
 ### 1.7 Compute the TRS and background correction p-values.
@@ -195,11 +205,7 @@ scPagwas_topgenes <- names(PCC[order(PCC, decreasing = T)])[1:500]
 In this step, we need to utilize the initially imported single-cell data once again.
 
 ```ruby
-Single_data <- Seurat::AddModuleScore(Single_data,
-        assay = 'RNA',
-        list(scPagwas_topgenes),
-        name = c("scPagwas.TRS.Score")
-      )
+Single_data <- Seurat::AddModuleScore(Single_data, assay = 'RNA', list(scPagwas_topgenes,scPagwas_upgenes,scPagwas_downgenes), name = c("scPagwas.TRS.Score","scPagwas.upTRS.Score","scPagwas.downTRS.Score"))
 correct_pdf <- scPagwas::Get_CorrectBg_p(Single_data=Single_data,
                                      scPagwas.TRS.Score=Single_data$scPagwas.TRS.Score1,
                                      iters_singlecell=100,
@@ -301,19 +307,26 @@ This step is identical to the later steps in Solution 1.
 
 ```ruby
 data_mat <- GetAssayData(Single_data, slot = "data", assay = "RNA")
-PCC<-scPagwas::Corr_Random(data_mat,
-                           scPagwas.gPAS.score,
-                           seed=1234,
-                           random=T,
-                           Nrandom=5, # you need change this parameter based on your cell numbers.
-                           Nselect=200 # you need change this parameter based on your cell numbers.
+#compute the heritability correlation(PCC) for each gene. 
+PCC<-scPagwas::Corr_Random(data_mat=data_mat,
+                          scPagwas.gPAS.score,
+                          seed=1234,
+                          random=T,
+                          Nrandom=5,# you need change this parameter
+                          Nselect=200 # you need change this parameter based on your cell numbers.
     )
+
+mean_gpas<-mean(scPagwas.gPAS.score)
+a1<-which(scPagwas.gPAS.score >= mean_gpas)
+a2<-which(scPagwas.gPAS.score < mean_gpas)
+
+PCC_up <- scPagwas::Corr_Random(scPagwas.gPAS.score=scPagwas.gPAS.score[a1],data_mat=data_mat[,a1])
+PCC_down <- scPagwas::Corr_Random(scPagwas.gPAS.score=scPagwas.gPAS.score[a2],data_mat=data_mat[,a2])
+
 scPagwas_topgenes <- names(PCC[order(PCC, decreasing = T)])[1:500]
-Single_data <- Seurat::AddModuleScore(Single_data,
-        assay = 'RNA',
-        list(scPagwas_topgenes),
-        name = c("scPagwas.TRS.Score")
-      )
+scPagwas_upgenes <- names(PCC_up)[order(PCC_up, decreasing = T)[1:500]]
+scPagwas_downgenes <- names(PCC_down)[order(PCC_down, decreasing = F)[1:500]]
+Single_data <- Seurat::AddModuleScore(Single_data, assay = 'RNA', list(scPagwas_topgenes,scPagwas_upgenes,scPagwas_downgenes), name = c("scPagwas.TRS.Score","scPagwas.upTRS.Score","scPagwas.downTRS.Score"))
 correct_pdf <- scPagwas::Get_CorrectBg_p(Single_data=Single_data,
                                      scPagwas.TRS.Score=Single_data$scPagwas.TRS.Score1,
                                      iters_singlecell=100,
@@ -322,18 +335,7 @@ correct_pdf <- scPagwas::Get_CorrectBg_p(Single_data=Single_data,
 Pagwas$scPagwas.TRS.Score = Single_data$scPagwas.TRS.Score1
 Pagwas$Random_Correct_BG_pdf <- correct_pdf
 Pagwas$Merged_celltype_pvalue<-scPagwas::Merge_celltype_p(single_p=correct_pdf$pooled_p,
-                                                          celltype=Idents(Single_data))
-#All the results can be found in the Pagwas result list.
-
-#output
-a <- data.frame(
-    scPagwas.TRS.Score = Single_data$scPagwas.TRS.Score1,
-    scPagwas.gPAS.score = scPagwas.gPAS.score,
-    Random_Correct_BG_p = correct_pdf$pooled_p,
-    Random_Correct_BG_adjp = correct_pdf$adj_p,
-    Random_Correct_BG_z = correct_pdf$pooled_z)
-utils::write.csv(a,file = paste0("./", output.dirs, "/singlecell_scPagwas_score_pvalue.Result.csv"),quote = F)
-
+                                                         celltype=Idents(Single_data))
 ```
 
 

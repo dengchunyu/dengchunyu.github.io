@@ -35,12 +35,6 @@ Then install it locally.
 devtools::install_local("sulab-wmu-scPagwas-****.tar.gz")
 ```
 
-Or,the source package can download from [here](https://github.com/dengchunyu/scPagwas_source).
-Before a successful installation, it is necessary to install many dependency packages based on the error messages.
-```ruby
-install.packages("scPagwas_1.2.0.tar.gz",repos=NULL,type="source")
-```
-
 ## Usage 
 quick-start example: 
 ```ruby
