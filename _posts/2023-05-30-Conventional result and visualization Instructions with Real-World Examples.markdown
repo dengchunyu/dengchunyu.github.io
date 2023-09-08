@@ -30,8 +30,8 @@ In this example, we run the scPagwas for usual step, both running singlecell and
 ```ruby
 library(scPagwas)
 Pagwas<-scPagwas_main(Pagwas =NULL,
-                     gwas_data="D:/OneDrive/GWAS_Multiomics/gwas_data/monocytecount_prune_gwas_data.txt",
-                     Single_data ="D:/OneDrive/GWAS_Multiomics/Compare/Hema_test2/Seu_Hema_data.rds",
+                     gwas_data="monocytecount_prune_gwas_data.txt",
+                     Single_data ="Seu_Hema_data.rds",
                      output.prefix="mono",
                      output.dirs="monocytecount_bmmc",
                      Pathway_list=Genes_by_pathway_kegg,
@@ -190,13 +190,12 @@ Positive cells(Random_Correct_BG_adjp<0.05): red dot; Negative cells: other dot.
 Plot the barplot of the proportion of positive Cells in celltypes:
 
 ```ruby
-pdf("D:/OneDrive/RPakage/scPagwas/vignettes/figures/plot_bar_positie_nagtive.pdf")
 plot_bar_positie_nagtive(seurat_obj=Pagwas,
-                         var_ident="celltypes",
+                         var_ident="celltypes",#you should change this to you specific columns
                          var_group="positiveCells",
                          vec_group_colors=c("#E8D0B3","#7EB5A6"),
                          do_plot = T)
-dev.off()
+
 ```
 ![alt_text](/public/img/plot_bar_positie_nagtive.png)
 Plot the barplot of the proportion of celltypes in positive and negative Cells:
@@ -205,7 +204,7 @@ Plot the barplot of the proportion of celltypes in positive and negative Cells:
 pdf("D:/OneDrive/RPakage/scPagwas/vignettes/figures/plot_bar_positie_nagtive.pdf")
 plot_bar_positie_nagtive(seurat_obj=Pagwas,
                               var_ident="positiveCells",
-                              var_group="celltypes",
+                              var_group="celltypes", #you should change this to you specific columns
                               p_thre = 0.01,
                               vec_group_colors=NULL,
                               f_color=colorRampPalette(brewer.pal(n=10, name="RdYlBu")),
