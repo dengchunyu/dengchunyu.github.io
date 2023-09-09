@@ -59,27 +59,20 @@ library(tidyverse)
 seudata_path="./single.pagwas.RData"
 load(seudata_path)
 
-#In this case, the data will be divided into two partitions.
-n=2
-an<-ncol(Pagwas$pca_scCell_mat)
-m=an/n
-m=floor(m)
-
 pca_scCell_mat<-Pagwas$pca_scCell_mat
 data_mat<-Pagwas$data_mat
 
-#Here's an example code snippet to loop through and output each partitioned data:
-for (i in 1:n) {
-    if(i*m > an){
-     Pagwas$pca_scCell_mat=pca_scCell_mat[,((i-1)*m+1):an] 
-     Pagwas$data_mat=data_mat[,((i-1)*m+1):(i*m)]
-     }else{
-     Pagwas$pca_scCell_mat=pca_scCell_mat[,((i-1)*m+1):(i*m)]
-     Pagwas$data_mat=data_mat[,((i-1)*m+1):(i*m)]
-     }
-    save(Pagwas,file=paste0(i,"_Pagwas_singledata.RData"))
- }
+Pagwas$pca_scCell_mat=pca_scCell_mat[,1:350] 
+Pagwas$data_mat=data_mat[,1:350]
+save(Pagwas,file="1_Pagwas_singledata.RData")
 
+Pagwas$pca_scCell_mat=pca_scCell_mat[,351:700] 
+Pagwas$data_mat=data_mat[,351:700]
+save(Pagwas,file="2_Pagwas_singledata.RData")
+
+Pagwas$pca_scCell_mat=pca_scCell_mat[,701:1000] 
+Pagwas$data_mat=data_mat[,701:1000]
+save(Pagwas,file="3_Pagwas_singledata.RData")
 ```
 
 ### 1.3 Input the gwas data and save output
