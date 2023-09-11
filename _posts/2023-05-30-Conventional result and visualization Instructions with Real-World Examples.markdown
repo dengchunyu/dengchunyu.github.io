@@ -228,7 +228,7 @@ heritability_cor_scatterplot(gene_heri_cor=Pagwas@misc$PCC,
 ```
 <img src="/public/img/heritability_cor_scatterplot.png" width="30%" />
 
-### 4.5 celltypes bootstrap_results reuslt 
+### 4.4 celltypes bootstrap_results reuslt 
 
 Barplot for celltypes 
 ```ruby
@@ -240,6 +240,7 @@ Bootstrap_P_Barplot(p_results=Pagwas@misc$bootstrap_results$bp_value[-1],
                     do_plot=T,
                     title = "monocytecount_bmmc")
 ```
+
 <img src="/public/img/Bootstrap_P_Barplot.png" width="30%" />
 
 Forest plot for estimate value. 
@@ -251,7 +252,48 @@ Bootstrap_estimate_Plot(bootstrap_results=Pagwas@misc$bootstrap_results,
                         height = 7,
                         do_plot=T)
 ```
+
 <img src="/public/img/estimate_Plot_00.png" width="30%" />
+
+### 4.5 Visualize the heritability correlated Pathways
+
+Plot the specific genetics pathway for each celltypes
+
+```ruby
+library(tidyverse)
+library("rhdf5")
+library(ggplot2)
+library(grDevices)
+library(stats)
+library(FactoMineR)
+library(scales)
+library(reshape2)
+library(ggdendro)
+library(grImport2)
+library(gridExtra)
+library(grid)
+library(sisal)
+
+source(system.file("extdata", "plot_scpathway_contri_dot.R", package = "scPagwas"))
+plot_scpathway_dot(Pagwas=Pagwas,
+                   celltypes=c("01_HSC","02_Early.Eryth","05_CMP.LMPP","11_CD14.Mono.1","12_CD14.Mono.2","13_CD16.Mono","15_CLP.2","19_CD8.N","20_CD4.N1","21_CD4.N2"),
+                   topn_path_celltype=5,
+                   filter_p=0.05,
+                   max_logp=15,
+                   display_max_sizes=F,
+                   size_var ="logrankPvalue" ,
+                   col_var="proportion",
+                   shape.scale = 8,
+                   cols.use=c("lightgrey", "#E45826"),
+                   dend_x_var = "logrankPvalue",
+                   dist_method="euclidean",
+                   hclust_method="ward.D",
+                   do_plot = T,
+                   width = 7,
+                   height = 7)
+```
+
+<img src="/public/img/plot_scpathway_dot.png" width="80%" />
 
 ### sessionInfo
 ```ruby
