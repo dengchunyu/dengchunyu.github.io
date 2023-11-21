@@ -29,11 +29,9 @@ devtools::install_github("sulab-wmu/scPagwas")
 
 In many cases, installing packages using `devtools::install_github` may fail. In such situations, an alternative approach is to download the package from a provided source URL and install it locally.
 
-Download the package file from [here](https://api.github.com/repos/sulab-wmu/scPagwas/tarball/HEAD)
-Then install it locally.
-```r
-devtools::install_local("sulab-wmu-scPagwas-****.tar.gz")
-```
+We also uploaded the installation package onto the Baidu cloud disk. If you're unable to connect to GitHub or access the internet, you can download it from here. I'll keep it updated in sync with GitHub.
+Link: https://pan.baidu.com/s/1X7pRzevQUIfLIATd2I0Dvw?pwd=1234
+Extract code: 1234
 
 ## Usage 
 quick-start example: 

@@ -150,28 +150,46 @@ length(unique(unlist(reduce_genes.by.reactome.pathway)))
 
 Gene block annotation in chromosome is need to prepare for scPagwas.
 scPagwas can provide a block annotation data for protein-coding genes.
-
-File downloaded from MAGMA website [MAGMA | CTG (cncr.nl)](https://ctg.cncr.nl/software/magma)
+GRCh37: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/latest_release/GRCh37_mapping/gencode.v44lift37.annotation.gff3.gz
+GRCh38: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/latest_release/gencode.v44.annotation.gff3.gz
 
 Here is the procedure of obtaining the data:
 
 ```ruby
 library("rtracklayer")
-gtf_df<- rtracklayer::import("gencode.v34.annotation.gtf.gz")
+gtf_df<- rtracklayer::import("/share/pub/dengcy/refGenome/gencode.v44lift37.annotation.gff3.gz")
+gtf_df <- as.data.frame(gtf_df)
+gtf_df <- gtf_df[,c("seqnames","start","end","type","gene_name")]
+gtf_df <- gtf_df[gtf_df$type=="gene",]
+block_annotation_hg37<-gtf_df[,c(1,2,3,5)]
+colnames(block_annotation_hg37)<-c("chrom", "start","end","label")
+save(block_annotation_hg37,file="/share/pub/dengcy/refGenome/block_annotation_hg37.RData")
+
+gtf_df<- rtracklayer::import("/share/pub/dengcy/refGenome/gencode.v44.annotation.gff3.gz")
 gtf_df <- as.data.frame(gtf)
 gtf_df <- gtf_df[,c("seqnames","start","end","type","gene_name")]
 gtf_df <- gtf_df[gtf_df$type=="gene",]
 block_annotation<-gtf_df[,c(1,2,3,5)]
 colnames(block_annotation)<-c("chrom", "start","end","label")
+save(block_annotation,file="/share/pub/dengcy/refGenome/block_annotation.RData")
 ```
+
 The block_annotation data provided by scPagwas is used to obtain the precise coordinates of genes, which enables the determination of the TSS range of each gene based on the size of the window. However, this data is not optimized for long-range enhancer regulation, which is why other methods like sclinker attempt to incorporate this information into the analysis. While block_annotation can be customized to suit specific annotation data formats, we consider TSS regulation to be more reliable and therefore prefer this approach.
 
 ### 5.LD data
 
 The LD data provided by the scPagwas software package is fixed and generally does not require modification.
-The 1,000 Genomes Project Phase 3 Panel was applied to calculate the linkage disequilibrium (LD) among SNPs extracted from GWAS summary statistics.
-the processed LD data are show here:
+GRCh38:
+ref: TOP-LD: A tool to explore linkage disequilibrium with TOPMed whole-genome sequence data
+EUR: http://topld.genetics.unc.edu/downloads/downloads/EUR/SNV/
+EAS：http://topld.genetics.unc.edu/downloads/downloads/EAS/SNV/
+```bash
 
+```
+
+
+GRCh37:
+The 1,000 Genomes Project Phase 3 Panel from European was applied to calculate the linkage disequilibrium (LD) among SNPs extracted from GWAS summary statistics.
 We use `vcftools` and `plink` to deal with the 1,000 Genomes genotypes.
 
 ```ruby
@@ -181,7 +199,6 @@ We use `vcftools` and `plink` to deal with the 1,000 Genomes genotypes.
 ```
 
 R environment to print out the scPagwas-needed data.
-
 ```ruby
 covid_ld<-read.delim("./ld_1000genome.ld")
 #remove sex chrome
