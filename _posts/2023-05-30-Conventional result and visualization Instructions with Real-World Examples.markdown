@@ -9,8 +9,7 @@ categories: RoutineUse
 To showcase the visualization effects accurately, we have opted to use real-world examples from the referenced article instead of the software's provided demo dataset. In this scenario, we will be utilizing the BMMC scRNA-seq data in conjunction with the GWAS data for monocyte count. It is important to note that due to the large size of the data, the computation time for this analysis may take several minutes. Hence, we recommend directly downloading the result data for convenient examination and exploration.
 The processed monocytecount gwas data can be download from:
 
-Onedrive: https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=pwSq1Q 
-pwd=1234  
+Onedrive: https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=pwSq1Q   
 
 BaiduCloud: https://pan.baidu.com/s/1Ce1vvd-u_ckllWOeDtAXkw?pwd=1234
 
@@ -24,7 +23,7 @@ Ondrive: https://1drv.ms/u/s!As-aKqXDnDUHjLNvq64d2GAK_pIGVA?e=bZSawC
 
 BaiduCloud: https://pan.baidu.com/s/1rB5iRvXTyHIZfQUFr7eGDw?pwd=1234  
 
-提取码：1234
+Code: 1234
 
 If you want to run the demo data, please go to **Conventional Usage Instructions for scPagwas with Demo Example Data**
 
