@@ -25,7 +25,7 @@ pwd=1234
 BaiduCloud: https://pan.baidu.com/s/1rB5iRvXTyHIZfQUFr7eGDw?pwd=1234  
 提取码：1234
 
-If you want to run the deno data, please go to **Conventional Usage Instructions for scPagwas with Demo Example Data**
+If you want to run the demo data, please go to **Conventional Usage Instructions for scPagwas with Demo Example Data**
 
 ## 2. Computing the singlecell and celltype result for Monocytecount trait
 
