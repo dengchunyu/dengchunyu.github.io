@@ -10,19 +10,20 @@ To showcase the visualization effects accurately, we have opted to use real-worl
 The processed monocytecount gwas data can be download from:
 
 Onedrive: https://1drv.ms/t/s!As-aKqXDnDUHi6sx7Hqblj2Sgl7P8w?e=pwSq1Q 
-pwd=1234
+pwd=1234  
 
 BaiduCloud: https://pan.baidu.com/s/1Ce1vvd-u_ckllWOeDtAXkw?pwd=1234
 
 BMMC example scRNA-seq data can be obtained from:
-Ondrive: https://1drv.ms/u/s!As-aKqXDnDUHjfcMjN4VGtAw1Utm0w?e=bOOBJl 
-pwd=1234 
+Ondrive: https://1drv.ms/u/s!As-aKqXDnDUHjfcMjN4VGtAw1Utm0w?e=bOOBJl  
+
 BaiduCloud: https://pan.baidu.com/s/1iarcexEBOflne86BblaOhg?pwd=1234 
 
 We can download the result files from:
-Ondrive: https://1drv.ms/u/s!As-aKqXDnDUHjLNvq64d2GAK_pIGVA?e=bZSawC  
-pwd=1234  
+Ondrive: https://1drv.ms/u/s!As-aKqXDnDUHjLNvq64d2GAK_pIGVA?e=bZSawC   
+
 BaiduCloud: https://pan.baidu.com/s/1rB5iRvXTyHIZfQUFr7eGDw?pwd=1234  
+
 提取码：1234
 
 If you want to run the demo data, please go to **Conventional Usage Instructions for scPagwas with Demo Example Data**
